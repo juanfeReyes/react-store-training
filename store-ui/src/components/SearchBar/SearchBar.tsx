@@ -28,7 +28,8 @@ export const SearchBar = (props: { handleSearchGames: (title: string) => void })
     <StyledContainer>
       <Paper
         component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '50%' }}>
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '50%' }}
+        elevation={4}>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder={placeHolder}
