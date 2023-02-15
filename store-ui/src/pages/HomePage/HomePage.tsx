@@ -1,21 +1,35 @@
-import { Container, Stack } from '@mui/material';
-import React from 'react';
-import { SearchButton } from '../../components/Button/Button';
+import { Stack } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Game } from '../../components/GamesList/GameItem';
+import { GamesList } from '../../components/GamesList/GamesList';
+import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { Title } from '../../components/Title/Title';
-
+import { getGames } from '../../services/GameService';
 
 export const HomePage = () => {
 
-    return <>
-        <Container maxWidth="lg">
-            <Stack spacing={2}>
-                <Title title='Stream Game Store' />
-                <SearchBar />
-                <SearchButton />
-            </Stack>
-        </Container>
+  const [games, setGames] = useState<Game[]>([])
 
+  const handleSearchGames = async (title: string) => {
+    const data = await getGames({title: title});
+    setGames(data)
+  }
 
-    </>
+  useEffect(() => {
+
+    const fetchGames = async () => {
+      const data = await getGames();
+      setGames(data)
+    }
+    
+    fetchGames();
+  }, [])
+
+  return (<>
+    <Stack>
+      <NavigationBar />
+      <SearchBar handleSearchGames={handleSearchGames}/>
+      <GamesList games={games}/>
+    </Stack>
+  </>)
 }
