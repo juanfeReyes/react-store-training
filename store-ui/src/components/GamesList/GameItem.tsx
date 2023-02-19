@@ -12,6 +12,7 @@ export interface Game {
   calification: number;
   price: number;
   publishDate: string;
+  stock: number;
 }
 
 const GameImage = styled.img<{ squareSize: number }>`
@@ -36,7 +37,7 @@ const GameHeader = (props: Game) => {
 }
 
 export const GameItem = (props: Game) => {
-  const { imgUrl,price, publishDate } = props;
+  const { imgUrl, price, publishDate, stock } = props;
 
   return <>
     <Paper elevation={1}>
@@ -48,6 +49,7 @@ export const GameItem = (props: Game) => {
           <Grid item xs>
             <GameHeader {...props}/>
             <Typography>Price: ${price}</Typography>
+            <Typography>Stock: {stock}</Typography>
             <Typography>Publish date: {new Date(publishDate).toLocaleDateString()}</Typography>
           </Grid>
         </Grid>
