@@ -1,8 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios"
 import pocketbaseEs from "pocketbase"
 import { Game } from "../components/GamesList/GameItem"
-
-const baseUrl = 'http://localhost:8090/api'
 
 const pb = new pocketbaseEs("http://localhost:8090")
 

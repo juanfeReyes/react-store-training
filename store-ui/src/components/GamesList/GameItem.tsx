@@ -1,6 +1,5 @@
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
-import StarIcon from '@mui/icons-material/Star';
 import { Grid } from "@mui/material";
 import styled from "styled-components";
 import { CalificationHeader } from "./CalificationHeader";
@@ -18,12 +17,6 @@ export interface Game {
 const GameImage = styled.img<{ squareSize: number }>`
   width: ${props => props.squareSize}px;
   height: ${props => props.squareSize}px;
-`
-
-const Header = styled(Grid)`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 `
 
 const GameHeader = (props: Game) => {
