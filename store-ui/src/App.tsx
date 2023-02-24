@@ -1,16 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { HomePage } from './pages/HomePage/HomePage';
 import { ThemeToggler } from './components/shared/ThemeManager/ThemeToggler';
+import { Provider } from 'react-redux';
+import { store } from './store/ReduxStore';
 
 function App() {
 
   return (
     <div className="App">
-      <ThemeToggler>
-        <HomePage />
-      </ThemeToggler>
+      <Provider store={store}>
+        <ThemeToggler>
+          <HomePage />
+        </ThemeToggler>
+      </Provider>
     </div>
   );
 }

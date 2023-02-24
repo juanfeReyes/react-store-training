@@ -20,9 +20,9 @@ export const CalificationHeader = (props: { calification: number }) => {
   return <>
     <Container>
       {calification <= 2 && <StarBorderIcon/>}
-      {calification == 3 && <StarHalfIcon/>}
-      {calification == 4 && <StarIcon/>}
-      {calification == 5 && <VerifiedIcon/>}
+      {calification === 3 && <StarHalfIcon/>}
+      {calification === 4 && <StarIcon/>}
+      {calification === 5 && <VerifiedIcon/>}
       <Typography> {calification}</Typography>
     </Container>
   </>

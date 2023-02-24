@@ -1,19 +1,11 @@
 import React from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { createContext, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useSelector } from 'react-redux/es/exports';
+import { selectTheme } from '../../../store/ThemeSlice';
 
-export const ColorModeContext = createContext({ toggleColorMode: () => { } })
-
-export const ThemeToggler = (props: {children: JSX.Element}) => {
-    const [mode, setMode] = useState<'light' | 'dark'>('light')
-    const colorMode = useMemo(
-        () => ({
-            toggleColorMode: () => {
-                setMode((preMode) => (preMode === 'light' ? 'dark' : 'light'))
-            }
-        }),
-        []
-    );
+export const ThemeToggler = (props: { children: JSX.Element }) => {
+    const mode = useSelector(selectTheme)
 
     const theme = useMemo(
         () =>
@@ -25,14 +17,11 @@ export const ThemeToggler = (props: {children: JSX.Element}) => {
         [mode],
     );
 
-
     return (
-      <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
+            <CssBaseline />
             {props.children}
         </ThemeProvider>
-      </ColorModeContext.Provider>
     );
-            
+
 }

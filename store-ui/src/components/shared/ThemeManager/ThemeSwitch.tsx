@@ -2,10 +2,11 @@ import { FormControlLabel, Switch } from "@mui/material"
 import FormGroup from "@mui/material/FormGroup"
 import { useTheme } from "@mui/material/styles";
 import React from "react";
-import { ColorModeContext } from "./ThemeToggler";
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import styled from "styled-components";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { toggleTheme } from "../../../store/ThemeSlice";
 
 
 const Container = styled.div`
@@ -14,14 +15,14 @@ const Container = styled.div`
 
 export const ThemeSwitch = () => {
 
+  const dispatch = useDispatch()
   const theme = useTheme()
-  const colorMode = React.useContext(ColorModeContext);
 
   return <>
     <Container>
       <FormGroup>
         <FormControlLabel control={
-          <Switch onClick={colorMode.toggleColorMode} />
+          <Switch onClick={() => dispatch(toggleTheme())} />
         } label={theme.palette.mode === 'light' ? < Brightness5Icon /> : <DarkModeIcon />} labelPlacement="start" />
       </FormGroup>
     </Container>
