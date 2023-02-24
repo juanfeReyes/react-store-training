@@ -15,7 +15,7 @@ export interface Game {
   stock: number;
 }
 
-const GameImage = styled.img<{ squareSize: number }>`
+export const GameImage = styled.img<{ squareSize: number }>`
   width: ${props => props.squareSize}px;
   height: ${props => props.squareSize}px;
 `
