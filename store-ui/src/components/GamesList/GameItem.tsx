@@ -3,8 +3,8 @@ import Typography from "@mui/material/Typography"
 import { Button, Grid } from "@mui/material";
 import styled from "styled-components";
 import { CalificationHeader } from "./CalificationHeader";
-import { useDispatch } from "react-redux";
-import { addGame } from "../../store/ShoppingCartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addGame, selectCart } from "../../store/ShoppingCartSlice";
 
 export interface Game {
   id: string;
@@ -41,6 +41,7 @@ export const GameItem = (props: Game) => {
   const { imgUrl, price, publishDate, stock, id } = props;
 
   const dispatch = useDispatch()
+  const shoppingCart = useSelector(selectCart)
 
   return <>
     <Paper elevation={1}>
@@ -55,12 +56,12 @@ export const GameItem = (props: Game) => {
               <Grid item><Typography><b>Price:</b> ${price}</Typography></Grid>
               <Grid item><Typography><b>Stock:</b> {stock}</Typography></Grid>
               <Grid item><Typography><b>Publish date:</b> {new Date(publishDate).toLocaleDateString()}</Typography></Grid>
-              
-              
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Button onClick={() => dispatch(addGame(props))} >add to cart</Button>
+            <Button
+              disabled={shoppingCart.games[id]?.count === stock || stock === 0}
+              onClick={() => dispatch(addGame(props))} >add to cart</Button>
           </Grid>
         </Grid>
 
