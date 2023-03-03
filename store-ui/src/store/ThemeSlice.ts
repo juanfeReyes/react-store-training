@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { RootState } from "./ReduxStore"
 
 const initialState : {value: 'light' | 'dark'} = {
   value: 'light'
@@ -14,8 +15,8 @@ const ThemeSlice = createSlice({
   }
 })
 
-export const selectTheme = (state: { ThemeReducer: {value: 'light' | 'dark'}} ) => state.ThemeReducer.value
+export const selectTheme = (state: RootState ) => state.theme.value
 
 export const { toggleTheme } = ThemeSlice.actions
 
-export const ThemeReducer = ThemeSlice.reducer
+export default ThemeSlice.reducer
