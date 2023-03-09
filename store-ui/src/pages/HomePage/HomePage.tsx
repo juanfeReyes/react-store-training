@@ -1,9 +1,9 @@
 import { Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Game } from '../../components/GamesList/GameItem';
 import { GamesList } from '../../components/GamesList/GamesList';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { Game } from '../../model/Game.model';
 import { getGames } from '../../services/GameService';
 
 export const HomePage = () => {

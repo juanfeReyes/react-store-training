@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Game } from "../components/GamesList/GameItem"
+import { Game } from "../model/Game.model"
 import { RootState } from "./ReduxStore"
 
+/**
+ * GameCartItem
+ * @alias GameCartItem
+ */
 export interface GameCartItem extends Game {
+  /** number of games in the cart */
   count: number
 }
 

@@ -12,7 +12,17 @@ const StyledContainer = styled.div`
   flex-wrap: wrap;
   justify-content: end;
 `
+/**
+ * @callback handleSearchGames
+ * @param {string} title - title to search the game
+ */
 
+/**
+ * Search bar to type the title of games to search
+ * 
+ * @param {handleSearchGames} handleSearchGames - function to search for games
+ * @component
+ */
 export const SearchBar = (props: { handleSearchGames: (title: string) => void }) => {
   const { handleSearchGames } = props;
   const [searchValue, setSearchValue] = useState('')

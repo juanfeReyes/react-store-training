@@ -22,6 +22,15 @@ const style = {
   p: 4,
 };
 
+/**
+ * Modal to show the list of games added to the shopping cart
+ * 
+ * @param {boolean} open - flag to open or close modal
+ * @param handleClose - function to open or close the modal
+ * 
+ * @component
+ *  
+ */
 export const ShoppingCartModal = (props: ShoppingCartModalProps) => {
   const { open, handleClose } = props;
   const shoppingCart = useSelector(selectCart)
@@ -44,9 +53,7 @@ export const ShoppingCartModal = (props: ShoppingCartModalProps) => {
         </Grid>
         {shoppingCart.counter === 0 ? <Typography> Shopping cart is empty</Typography> :
           <Grid container >
-            {Object.entries(shoppingCart.games).map(entry => {
-              const [key, game] = entry
-
+            {Object.values(shoppingCart.games).map(game => {
               return <>
                 <GameItemCart {...game} />
               </>

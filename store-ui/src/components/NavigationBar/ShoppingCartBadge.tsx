@@ -5,7 +5,12 @@ import { selectCart } from "../../store/ShoppingCartSlice";
 import { useState } from "react";
 import { ShoppingCartModal } from "../shared/Modal/ShoppingCartModal";
 
-
+/**
+ * Shopping cart badge
+ * - Shows number of items and shows a modal to show a resume Games in the shopping cart
+ * 
+ * @component
+ */
 export const ShoppingCartBadge = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

@@ -1,9 +1,14 @@
-import { Button, Grid, IconButton, styled, Typography } from "@mui/material"
-import { Game } from "../GamesList/GameItem"
+import { Button, Grid, IconButton, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { GameCartItem, removeGame } from "../../store/ShoppingCartSlice";
 import { useDispatch } from "react-redux";
 
+/**
+ * Component to display a game added to the shopping cart
+ * 
+ * @param {GameCartItem} props  - Game cart item to store the game info and number of games in the cart
+ * @component 
+ */
 export const GameItemCart = (props: GameCartItem) => {
   const { id, title, count } = props;
   const dispatch = useDispatch()

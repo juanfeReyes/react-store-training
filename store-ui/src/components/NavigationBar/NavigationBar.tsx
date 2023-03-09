@@ -12,7 +12,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
-import { Badge } from '@mui/material';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
 
 const pages = ['Game', 'Cart'];
@@ -57,6 +56,11 @@ const ProfileButton = (props: any) => {
   </>
 }
 
+/**
+ *  Navigation bar to contain menu, navigation options and home button
+ * 
+ * @component
+ */
 export function NavigationBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
