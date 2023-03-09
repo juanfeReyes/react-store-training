@@ -5,17 +5,8 @@ import styled from "styled-components";
 import { CalificationHeader } from "./CalificationHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { addGame, selectCart } from "../../store/ShoppingCartSlice";
+import { Game } from "../../model/Game.model";
 
-export interface Game {
-  id: string;
-  imgUrl: string;
-  title: string;
-  description: string;
-  calification: number;
-  price: number;
-  publishDate: string;
-  stock: number;
-}
 
 export const GameImage = styled.img<{ squareSize: number }>`
   width: ${props => props.squareSize}px;
@@ -37,6 +28,18 @@ const GameHeader = (props: Game) => {
   )
 }
 
+/**
+ * Component for each Game Item
+ * 
+ * @component
+ * @param {Game} props - Game to display
+ * @example
+ * const games = getGames();
+ * return (
+ *  games.map((game) =>
+ *    <GameItem  {...game}></GameItem>
+ * )
+ */
 export const GameItem = (props: Game) => {
   const { imgUrl, price, publishDate, stock, id } = props;
 

@@ -1,10 +1,11 @@
-import { Box, Button, Card, Grid, GridProps, IconButton, Modal, Rating, styled, TextField, Typography } from "@mui/material"
+import { Box, Button, Grid, GridProps, IconButton, Modal, Rating, styled, TextField, Typography } from "@mui/material"
 import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
-import { Game, GameImage } from "../../GamesList/GameItem";
+import { GameImage } from "../../GamesList/GameItem";
 import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { createGame } from "../../../services/GameService";
+import { Game } from "../../../model/Game.model";
 
 interface CreateModalError {
   title?: string,
@@ -45,6 +46,13 @@ const CalificationContainerStyled = styled(Grid)<GridProps>(({ theme }) => ({
   justifyContent: 'flex-end'
 }))
 
+/**
+ * Create game modal
+ * - Displays a modal with a form to create a modal
+ * - Performs form validation and request server-side Game creation
+ * 
+ * @component
+ */
 export const CreateGameModal = () => {
 
   const [open, setOpen] = useState(false);

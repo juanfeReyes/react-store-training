@@ -12,7 +12,12 @@ import { toggleTheme } from "../../../store/ThemeSlice";
 const Container = styled.div`
   padding-right: 0.5rem;
 `
-
+/**
+ * Switch component to toggle between light or dark theme in the application
+ * - The component uses redux store to handle the theme 
+ * 
+ * @component
+ */
 export const ThemeSwitch = () => {
 
   const dispatch = useDispatch()
