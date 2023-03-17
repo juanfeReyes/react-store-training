@@ -6,6 +6,7 @@ import { CalificationHeader } from "./CalificationHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { addGame, selectCart } from "../../store/ShoppingCartSlice";
 import { Game } from "../../model/Game.model";
+import { useNavigate } from "react-router-dom";
 
 
 export const GameImage = styled.img<{ squareSize: number }>`
@@ -45,6 +46,11 @@ export const GameItem = (props: Game) => {
 
   const dispatch = useDispatch()
   const shoppingCart = useSelector(selectCart)
+  const navigate = useNavigate()
+
+  const goToDetailPage = () => {
+    navigate(`/games/${id}`)
+  }
 
   return <>
     <Paper elevation={1}>
@@ -63,8 +69,12 @@ export const GameItem = (props: Game) => {
           </Grid>
           <Grid item xs={6}>
             <Button
+              onClick={goToDetailPage} >Details</Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
               disabled={shoppingCart.games[id]?.count === stock || stock === 0}
-              onClick={() => dispatch(addGame(props))} >add to cart</Button>
+              onClick={() => dispatch(addGame({game: props}))} >add to cart</Button>
           </Grid>
         </Grid>
 

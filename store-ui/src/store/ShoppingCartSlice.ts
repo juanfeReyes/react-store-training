@@ -1,15 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Game } from "../model/Game.model"
+import { GameCartItem } from "../model/ShoppingCart.model"
 import { RootState } from "./ReduxStore"
-
-/**
- * GameCartItem
- * @alias GameCartItem
- */
-export interface GameCartItem extends Game {
-  /** number of games in the cart */
-  count: number
-}
 
 export interface ShoppingCartSliceState {
   games: {[key: string]: GameCartItem}
@@ -25,13 +17,15 @@ const ShoppingCartSlice = createSlice({
   name: 'shoppingCart',
   initialState,
   reducers: {
-    addGame(state, gameAction: PayloadAction<Game>) {
-      if(state.games[gameAction.payload.id]) {
-        state.games[gameAction.payload.id].count++
+    addGame(state, gameAction: PayloadAction<{game:Game, count?: number}>) {
+      const game = gameAction.payload.game
+      const count = gameAction.payload.count ? gameAction.payload.count : 1;
+      if(state.games[game.id]) {
+        state.games[game.id].count+= count
       }else {
-        state.games[gameAction.payload.id] = { ...gameAction.payload, count:1 }
+        state.games[game.id] = { ...game, count: count }
       }
-      state.counter++
+      state.counter+= count
     }, 
     removeGame(state, idAction: PayloadAction<string>){
       state.games[idAction.payload].count--
