@@ -18,6 +18,17 @@ export const getGames = async (filter: {title: string} = {title: ''}, page: numb
 }
 
 /**
+ * 
+ * Service to request information for one item
+ * 
+ * @param id 
+ * @returns a game information
+ */
+export const getGameDetail = async (id: string) => {
+  return (await pb.collection(gameCollection).getOne<Game>(id, {expand: 'comment.author,recomendedGames'}))
+}
+
+/**
  * Service to create game in server
  * 
  * @param game - Game to create

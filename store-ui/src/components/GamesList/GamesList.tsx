@@ -5,6 +5,10 @@ import { GameItem } from "./GameItem"
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import { ListHeader } from "./ListHeader";
 import { Game } from "../../model/Game.model";
+import { useEffect, useState } from "react";
+import { getGames } from "../../services/GameService";
+import { SearchBar } from "../SearchBar/SearchBar";
+import { useLoaderData } from "react-router-dom";
 
 /**
  * Component to display a list of Games
@@ -17,14 +21,20 @@ import { Game } from "../../model/Game.model";
  *  <GameList games={games}/>
  * )
  */
-export const GamesList = (props: { games: Game[] }) => {
+export const GamesList = () => {
+  const {response} = useLoaderData() as {response: Game[]};
+  const [games, setGames] = useState<Game[]>(response)
 
-  const { games } = props;
+  const handleSearchGames = async (title: string) => {
+    const data = await getGames({ title: title });
+    setGames(data)
+  }
 
   return <>
+    <SearchBar handleSearchGames={handleSearchGames} />
     <Container>
-      <ListHeader  title="Games"/>
-      {games.length === 0 && <Typography variant='h3'> <SentimentDissatisfiedIcon fontSize='large'/> No games found</Typography>}
+      <ListHeader title="Games" />
+      {games.length === 0 && <Typography variant='h3'> <SentimentDissatisfiedIcon fontSize='large' /> No games found</Typography>}
       <Grid container spacing={2} rowSpacing={4}>
         {games.map((game) =>
           <Grid item xs={4} key={game.id}>

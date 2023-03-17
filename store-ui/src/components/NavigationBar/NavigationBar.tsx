@@ -14,7 +14,6 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
 
-const pages = ['Game', 'Cart'];
 const settings = ['Profile', 'Logout'];
 const title = 'Stream Game Store'
 
@@ -125,15 +124,6 @@ export function NavigationBar() {
             {title}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
           </Box>
 
           <ShoppingCartBadge />

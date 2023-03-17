@@ -1,3 +1,5 @@
+import { Comment } from "./Comment.modal";
+
 /**
  * Game
  * @alias Game
@@ -26,4 +28,12 @@ export interface Game {
 
   /** number of games available in stock for rapid delivery */
   stock: number;
+
+  /** List of Comments ids */
+  comments: string[]
+
+  expand?: { 
+    comment?: Comment[],
+    recomendedGames?: Game[]
+  }
 }

@@ -1,7 +1,8 @@
 import { Button, Grid, IconButton, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { GameCartItem, removeGame } from "../../store/ShoppingCartSlice";
+import { removeGame } from "../../store/ShoppingCartSlice";
 import { useDispatch } from "react-redux";
+import { GameCartItem } from "../../model/ShoppingCart.model";
 
 /**
  * Component to display a game added to the shopping cart
