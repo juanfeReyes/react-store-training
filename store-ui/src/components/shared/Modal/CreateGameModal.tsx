@@ -6,6 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { createGame } from "../../../services/GameService";
 import { Game } from "../../../model/Game.model";
+import { useModalState } from "../../../services/hooks/ModalHooks";
 
 interface CreateModalError {
   title?: string,
@@ -56,14 +57,12 @@ const CalificationContainerStyled = styled(Grid)<GridProps>(({ theme }) => ({
  */
 export const CreateGameModal = () => {
 
-  const [open, setOpen] = useState(false);
+  const [open, handleOpen, handleClose] = useModalState();
   const [newGame, setNewGame] = useState<Game>(newGameInitialState)
   const [errors, setErrors] = useState<CreateModalError>({})
 
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
+  const handleModalClose = () => {
+    handleClose()
     resetForm()
   }
 
@@ -77,12 +76,6 @@ export const CreateGameModal = () => {
       }
     }
   }
-
-  const handleCancel = () => {
-    setOpen(false);
-    resetForm()
-  }
-
   const formValidation = () => {
     let errors = {};
     if (!newGame.title) { errors = { ...errors, title: 'Required' } }
@@ -160,7 +153,7 @@ export const CreateGameModal = () => {
             </Grid>
           </BodyContainer>
           <Grid container item xs={12} justifyContent='space-evenly'>
-            <Button onClick={handleCancel} variant="outlined" startIcon={<CancelIcon />}>
+            <Button onClick={handleModalClose} variant="outlined" startIcon={<CancelIcon />}>
               Cancel
             </Button>
             <Button onClick={handleSubmit} variant="contained" endIcon={<CheckIcon />}>
@@ -168,11 +161,6 @@ export const CreateGameModal = () => {
             </Button>
           </Grid>
         </Grid>
-
-
-
-
-
       </Box>
     </Modal>
   </>
