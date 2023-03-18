@@ -2,8 +2,8 @@ import { Badge, IconButton } from "@mui/material"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/ShoppingCartSlice";
-import { useState } from "react";
 import { ShoppingCartModal } from "../shared/Modal/ShoppingCartModal";
+import { useModalState } from "../../services/hooks/ModalHooks";
 
 /**
  * Shopping cart badge
@@ -12,9 +12,7 @@ import { ShoppingCartModal } from "../shared/Modal/ShoppingCartModal";
  * @component
  */
 export const ShoppingCartBadge = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, handleOpen, handleClose] = useModalState();
 
   const shoppingCart = useSelector(selectCart)
 
