@@ -36,7 +36,8 @@ const newGameInitialState = {
   price: 0,
   publishDate: '',
   stock: 0,
-  comments: []
+  comments: [],
+  tags: []
 }
 
 const BodyContainer = styled(Grid)<GridProps>(({ theme }) => ({
