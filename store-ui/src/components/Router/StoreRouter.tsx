@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { ErrorPage } from "../../pages/ErrorPage"
 import { GameDetailPage } from "../../pages/GameDetailPage"
 import { HomePage } from "../../pages/HomePage"
@@ -13,8 +13,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Navigate to="games" replace/>,
+      },
+      {
+        path: '/games',
         element: <GamesList/>,
-        loader: async () => ({response: await getGames()})
+        loader: async () => ({response: await getGames()}),
+      },
+      {
+        path: '/games/tags/:id',
+        element: <GamesList/>,
+        loader: async ({params}) => {
+          const filters = {title:'', tag: params.id};
+          return {filters: filters, response: await getGames(filters)}
+        }
       },
       {
         path: '/games/:id',

@@ -13,8 +13,8 @@ const gameCollection = 'games';
  * @param limit - size of the page
  * @returns List of games
  */
-export const getGames = async (filter: {title: string} = {title: ''}, page: number = 0, limit: number = 10) => {
-  return (await pb.collection(gameCollection).getList<Game>(page, limit, {filter: `title~'${filter.title}'`})).items
+export const getGames = async (filter: {title: string, tag?: string} = {title: '', tag: ''}, page: number = 0, limit: number = 10) => {
+  return (await pb.collection(gameCollection).getList<Game>(page, limit, {filter: `(title~'${filter.title}'&&tags~'${filter.tag? filter.tag :''}')`})).items
 }
 
 /**
