@@ -7,24 +7,26 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
+import { useAuth } from '../../services/hooks/AuthHooks';
+import { AccountCircle } from '@mui/icons-material';
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile'];
 const title = 'Stream Game Store'
 
 const ProfileButton = (props: any) => {
+  const [user, login, logout, isLogin] = useAuth()
   const { handleOpenUserMenu, handleCloseUserMenu, anchorElUser } = props;
 
   return <>
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          {user ? <Avatar alt={user.record.name} src="/static/images/avatar/2.jpg" /> : <AccountCircle />}
         </IconButton>
       </Tooltip>
       <Menu
@@ -49,6 +51,9 @@ const ProfileButton = (props: any) => {
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
+        <MenuItem disabled={!isLogin()} key={'Log out'} onClick={logout}>
+            <Typography textAlign="center">{'Log out'}</Typography>
+          </MenuItem>
         <ThemeSwitch />
       </Menu>
     </Box>
