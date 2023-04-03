@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography, styled as mstyled, Divider, Chip, Stack } from "@mui/material";
 import { Container } from "@mui/system";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CommentList } from "../components/CommentList/CommentList";
 import { CalificationHeader } from "../components/GamesList/CalificationHeader";
@@ -54,12 +54,19 @@ const GameInfo = (props: { game: Game }) => {
 }
 
 const TagBanner = (props: { tags: string[] }) => {
+
+  const navigate = useNavigate()
+
+  const handleChipClick = (tag: string) => {
+    navigate(`/games/tags/${tag}`)
+  }
+
   return <>
     <GridContent container spacing={2}>
       {
         props.tags.map((tag) =>
           <Grid item xs={'auto'}>
-            <Chip label={tag} />
+            <Chip label={tag} onClick={() => handleChipClick(tag)} />
           </Grid>
         )
       }
