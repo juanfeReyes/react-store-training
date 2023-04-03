@@ -14,6 +14,7 @@ const Container = styled(Paper)(() => ({
 
 const GridContainer = styled(Grid)(() => ({
   padding: '0.5rem',
+  justifyContent: 'flex-end'
 }))
 
 
@@ -24,9 +25,9 @@ export const MultipleAddToCart = (props: { label: string, game: Game }) => {
   const dispatch = useDispatch()
 
   return <>
-    <GridContainer id='multiple-add-cart' container justifyContent='flex-end'>
+    <GridContainer id='multiple-add-cart' container>
       <Container elevation={3}>
-        <Grid container rowSpacing={2} justifyContent={'space-between'}>
+        <Grid container rowSpacing={2}>
           <Grid item xs={10}>
             <TextField
               fullWidth
