@@ -32,6 +32,9 @@ export interface Game {
   /** List of Comments ids */
   comments: string[]
 
+  /** List of tags */
+  tags: string[]
+
   expand?: { 
     comment?: Comment[],
     recomendedGames?: Game[]

@@ -17,6 +17,7 @@ const ListContainer =  styled(Grid)(() => ({
 const HeaderStyled = styled(Typography)(() => ({
   textAlign: 'left',
   padding: '0.5rem',
+  paddingTop: '2rem'
 }))
 
 const CommentItem = (props: Comment ) => {

@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography, styled as mstyled, Divider } from "@mui/material";
+import { Grid, Paper, Typography, styled as mstyled, Divider, Chip, Stack } from "@mui/material";
 import { Container } from "@mui/system";
 import { useLoaderData } from "react-router-dom";
 import styled from "styled-components";
@@ -22,23 +22,55 @@ const RecommendedGamesContainer = styled(Grid)(() => ({
   padding: "1rem"
 }))
 
+const GridContent = styled(Grid)(() => ({
+  justifyContent: 'flex-end'
+}))
+
 const DetailRow = (props: { title: string, children: JSX.Element }) => {
   return <>
-    <Grid container justifyContent={'space-between'}>
-      <Grid item xs={6} container justifyContent='flex-start'>
+    <Grid container>
+      <Grid item xs={6} container >
         <Typography><b>{props.title}</b></Typography>
       </Grid>
-      <Grid container item xs={6} justifyContent='flex-end'>
+      <GridContent container item xs={6}>
         {props.children}
-      </Grid>
+      </GridContent>
     </Grid>
+  </>
+}
+
+const GameInfo = (props: { game: Game }) => {
+  const { description, calification, price, stock, publishDate } = props.game;
+
+  return <>
+    <Grid container >
+      <DetailRow title=""><CalificationHeader calification={calification} /></DetailRow>
+      <DetailRow title="Publish Date:"><Typography variant="body1">{new Date(publishDate).toLocaleDateString()}</Typography></DetailRow>
+      <DetailRow title="Price:"><Typography variant="body1">$ {price}</Typography></DetailRow>
+      <DetailRow title="Stock:"><Typography variant="body1">{stock}</Typography></DetailRow>
+      <Typography textAlign={"justify"} variant="body1">{description}</Typography>
+    </Grid>
+  </>
+}
+
+const TagBanner = (props: { tags: string[] }) => {
+  return <>
+    <GridContent container spacing={2}>
+      {
+        props.tags.map((tag) =>
+          <Grid item xs={'auto'}>
+            <Chip label={tag} />
+          </Grid>
+        )
+      }
+    </GridContent>
   </>
 }
 
 
 export const GameDetailPage = () => {
   const game = (useLoaderData() as { response: Game }).response
-  const { title, description, imgUrl, calification, price, stock, publishDate } = game;
+  const { title, imgUrl, tags } = game;
 
   return <>
     <Container>
@@ -47,19 +79,15 @@ export const GameDetailPage = () => {
           <Typography variant="h3">{title}</Typography>
         </Grid>
         <Grid container item xs={12}>
-          <Grid item xs={8}>
-            <GameImage squareSize={300} src={imgUrl} />
+          <Grid item xs={7}>
+            <GameImage squareSize={325} src={imgUrl} />
           </Grid>
-          <Grid container item xs={4} justifyContent='center' alignItems='center'>
-            <div>
-              <Grid container >
-                <DetailRow title="Calification:"><CalificationHeader calification={calification} /></DetailRow>
-                <DetailRow title="Description:"><Typography variant="body1">{description}</Typography></DetailRow>
-                <DetailRow title="Price:"><Typography variant="body1">$ {price}</Typography></DetailRow>
-                <DetailRow title="Stock:"><Typography variant="body1">{stock}</Typography></DetailRow>
-                <DetailRow title="Publish Date:"><Typography variant="body1">{new Date(publishDate).toLocaleDateString()}</Typography></DetailRow>
-              </Grid>
-            </div>
+          <Grid item xs={5}>
+              <Stack alignItems={'center'} justifyContent={'space-between'} spacing={1} direction="column">
+                <TagBanner tags={tags} />
+                <GameInfo game={game} />
+                <MultipleAddToCart label="Games to cart" game={game} />
+              </Stack>
           </Grid>
         </Grid>
         <Grid container item xs={12}>
@@ -69,8 +97,6 @@ export const GameDetailPage = () => {
           <Divider orientation="vertical" flexItem />
           <Grid container item xs={5}>
             <div>
-              <MultipleAddToCart label="Games to cart" game={game} />
-              <Divider variant="middle" />
               <RecommendedGamesContainer container>
                 <Grid item xs={12}>
                   <div>
