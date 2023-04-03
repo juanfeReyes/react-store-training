@@ -18,19 +18,28 @@ const HeaderStyled = mstyled(Typography)(() => ({
   padding: '1rem',
 }))
 
-const RecommendedGamesContainer = styled(Grid)(() => ({
+const RecommendedGamesContainer = mstyled(Grid)(() => ({
   padding: "1rem"
+}))
+
+const GridContent = mstyled(Grid)(() => ({
+  justifyContent: 'flex-end'
+}))
+
+const GameDetailStackStyled = mstyled(Stack)(() => ({
+  alignItems: 'center',
+  justifyContent: 'space-between'
 }))
 
 const DetailRow = (props: { title: string, children: JSX.Element }) => {
   return <>
-    <Grid container justifyContent={'space-between'}>
-      <Grid item xs={6} container justifyContent='flex-start'>
+    <Grid container>
+      <Grid item xs={6} container >
         <Typography><b>{props.title}</b></Typography>
       </Grid>
-      <Grid container item xs={6} justifyContent='flex-end'>
+      <GridContent container item xs={6}>
         {props.children}
-      </Grid>
+      </GridContent>
     </Grid>
   </>
 }
@@ -51,7 +60,7 @@ const GameInfo = (props: { game: Game }) => {
 
 const TagBanner = (props: { tags: string[] }) => {
   return <>
-    <Grid container justifyContent={'flex-end'} spacing={2}>
+    <GridContent container spacing={2}>
       {
         props.tags.map((tag) =>
           <Grid item xs={'auto'}>
@@ -59,7 +68,7 @@ const TagBanner = (props: { tags: string[] }) => {
           </Grid>
         )
       }
-    </Grid>
+    </GridContent>
   </>
 }
 
@@ -79,11 +88,11 @@ export const GameDetailPage = () => {
             <GameImage squareSize={325} src={imgUrl} />
           </Grid>
           <Grid item xs={5}>
-              <Stack alignItems={'center'} justifyContent={'space-between'} spacing={1} direction="column">
+              <GameDetailStackStyled spacing={1} direction="column">
                 <TagBanner tags={tags} />
                 <GameInfo game={game} />
                 <MultipleAddToCart label="Games to cart" game={game} />
-              </Stack>
+              </GameDetailStackStyled>
           </Grid>
         </Grid>
         <Grid container item xs={12}>
