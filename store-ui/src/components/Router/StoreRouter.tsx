@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'tags/:id',
-        element: <GamesList/>,
+        element: <ProtectedRoute><GamesList/></ProtectedRoute>,
         loader: async ({params}) => {
           const filters = {title:'', tag: params.id};
           return {filters: filters, response: await getGames(filters)}
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: ':id',
-        element: <ProtectedRoute><GameDetailPage /></ProtectedRoute>,
+        element: <GameDetailPage />,
         loader: async ({params}) => ({response: await getGameDetail(params.id as string)})
       }
     ]

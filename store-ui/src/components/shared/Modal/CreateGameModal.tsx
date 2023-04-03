@@ -7,6 +7,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { createGame } from "../../../services/GameService";
 import { Game } from "../../../model/Game.model";
 import { useModalState } from "../../../services/hooks/ModalHooks";
+import { useAuth } from "../../../services/hooks/AuthHooks";
 
 interface CreateModalError {
   title?: string,
@@ -61,6 +62,7 @@ export const CreateGameModal = () => {
   const [open, handleOpen, handleClose] = useModalState();
   const [newGame, setNewGame] = useState<Game>(newGameInitialState)
   const [errors, setErrors] = useState<CreateModalError>({})
+  const [user, login, logout, isLogin] = useAuth()
 
   const handleModalClose = () => {
     handleClose()
@@ -72,7 +74,7 @@ export const CreateGameModal = () => {
       try {
         await createGame({ ...newGame, publishDate: new Date().toISOString() })
         handleClose()
-      } catch (error:any) {
+      } catch (error: any) {
         console.log(error.data)
       }
     }
@@ -93,9 +95,11 @@ export const CreateGameModal = () => {
   }
 
   return <>
-    <IconButton onClick={handleOpen} aria-label="delete">
-      <AddIcon />
-    </IconButton>
+    {isLogin() &&
+      <IconButton onClick={handleOpen} aria-label="delete">
+        <AddIcon />
+      </IconButton>
+    }
     <Modal
       open={open}
       onClose={handleClose}

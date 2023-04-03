@@ -14,6 +14,7 @@ import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
 import { useAuth } from '../../services/hooks/AuthHooks';
 import { AccountCircle } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const settings = ['Profile'];
 const title = 'Stream Game Store'
@@ -21,12 +22,17 @@ const title = 'Stream Game Store'
 const ProfileButton = (props: any) => {
   const [user, login, logout, isLogin] = useAuth()
   const { handleOpenUserMenu, handleCloseUserMenu, anchorElUser } = props;
+  const navigate = useNavigate();
+
+  const goToLoginPage = () => {
+    navigate('/login')
+  }
 
   return <>
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          {user ? <Avatar alt={user.record.name} src="/static/images/avatar/2.jpg" /> : <AccountCircle />}
+          {isLogin() ? <Avatar alt={user.record.name.toUpperCase()} src="/static/images/avatar/3.jpg" /> : <AccountCircle />}
         </IconButton>
       </Tooltip>
       <Menu
@@ -51,9 +57,15 @@ const ProfileButton = (props: any) => {
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
-        <MenuItem disabled={!isLogin()} key={'Log out'} onClick={logout}>
+        {
+          isLogin() ?
+          <MenuItem key={'Log out'} onClick={logout}>
             <Typography textAlign="center">{'Log out'}</Typography>
-          </MenuItem>
+          </MenuItem> :
+          <MenuItem key={'Login'} onClick={goToLoginPage}>
+          <Typography textAlign="center">{'Login'}</Typography>
+        </MenuItem>
+        }
         <ThemeSwitch />
       </Menu>
     </Box>
