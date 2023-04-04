@@ -1,7 +1,5 @@
-import pocketbaseEs from "pocketbase"
 import { Game } from "../model/Game.model";
-
-const pb = new pocketbaseEs("http://localhost:8090")
+import { pb } from "./AuthService";
 
 const gameCollection = 'games';
 
