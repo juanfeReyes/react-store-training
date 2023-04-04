@@ -12,6 +12,11 @@ const LoginContainer = styled(Container)(() => ({
   paddingTop: '5rem'
 }))
 
+const GridCenterStyled = styled(Grid)(() => ({
+  justifyContent: 'center',
+  alignItems: 'center'
+}))
+
 
 export const LoginPage = () => {
   const [user, login] = useAuth()
@@ -24,22 +29,26 @@ export const LoginPage = () => {
   };
 
   const handleLogin = async () => {
-    try{
+    try {
       await login(userForm.username, userForm.password)
-    } catch(e: any) {
-      setUserForm({...userForm, error: true, errorMessage: e.message})
+    } catch (e: any) {
+      setUserForm({ ...userForm, error: true, errorMessage: e.message })
     }
   }
 
   const handleType = (field: string, value: string) => {
-    setUserForm({...userForm, [field]: value})
+    setUserForm({ ...userForm, [field]: value })
   }
 
   return <>
     <LoginContainer>
-      <Grid container justifyContent={'center'} alignItems='center' rowSpacing={1}>
+      <GridCenterStyled container rowSpacing={1}>
         <Grid item sm={12}><Typography variant="h2"><StorefrontIcon fontSize='large'/> Login</Typography></Grid>
-        {userForm.error && <Grid item sm={12} alignItems='center'><Typography color={'red'}><ReportIcon/> {userForm.errorMessage}</Typography></Grid>}
+        {userForm.error &&
+          <GridCenterStyled item sm={12}>
+            <Typography color={'red'}><ReportIcon /> {userForm.errorMessage}</Typography>
+          </GridCenterStyled>
+        }
         <Grid item sm={12}>
           <TextField
             id="user-name-input"
@@ -57,32 +66,32 @@ export const LoginPage = () => {
           />
         </Grid>
         <Grid item sm={12}>
-        <FormControl  variant="outlined" onChange={(event) => handleType('password', (event.target as HTMLInputElement).value)}>
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            value={userForm.password}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl>
+          <FormControl variant="outlined" onChange={(event) => handleType('password', (event.target as HTMLInputElement).value)}>
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? 'text' : 'password'}
+              value={userForm.password}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
         </Grid>
         <Grid item sm={12}>
           <Button onClick={handleLogin}>Login</Button>
         </Grid>
-      </Grid>
+      </GridCenterStyled>
     </LoginContainer>
   </>
 }
