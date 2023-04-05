@@ -5,8 +5,8 @@ import React from "react";
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import styled from "styled-components";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { toggleTheme } from "../../../store/ThemeSlice";
+import { useDispatch } from "react-redux";
 
 
 const Container = styled.div`

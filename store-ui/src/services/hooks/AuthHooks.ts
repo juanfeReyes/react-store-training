@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+//import { useLocation, useNavigate } from "react-router-dom";
 import { authUser, logoutUser } from "../AuthService";
 
 const USER_STORAGE = 'user_storage'
@@ -29,19 +29,20 @@ export const useLocalStorage = (keyName: string, defaultValue: any) => {
 
 export const useAuth = () => {
   const [userLocalStorage, setUserLocalStorage] = useLocalStorage(USER_STORAGE, null)
-  const navigate = useNavigate()
+  //TODO: fix navigation
+  //const navigate = useNavigate()
 
   const login = async (username: string, password: string) => {
     const authData = await authUser(username, password)
     setUserLocalStorage(authData)
-    navigate(-2)
+    // navigate(-2)
   }
 
   const logout = async () => {
     await logoutUser()
     setUserLocalStorage(null)
-    navigate('/')
-    navigate(0)
+    // navigate('/')
+    // navigate(0)
   }
 
   const isLogin = ():boolean => {

@@ -14,7 +14,6 @@ import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
 import { useAuth } from '../../services/hooks/AuthHooks';
 import { AccountCircle } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 
 const settings = ['Profile'];
 const title = 'Stream Game Store'
@@ -22,11 +21,12 @@ const title = 'Stream Game Store'
 const ProfileButton = (props: any) => {
   const [user, login, logout, isLogin] = useAuth()
   const { handleOpenUserMenu, handleCloseUserMenu, anchorElUser } = props;
-  const navigate = useNavigate();
+  //TODO: fix navigation
+  // const navigate = useNavigate();
 
-  const goToLoginPage = () => {
-    navigate('/login')
-  }
+  // const goToLoginPage = () => {
+  //   navigate('/login')
+  // }
 
   return <>
     <Box sx={{ flexGrow: 0 }}>
@@ -59,12 +59,13 @@ const ProfileButton = (props: any) => {
         ))}
         {
           isLogin() ?
-          <MenuItem key={'Log out'} onClick={logout}>
-            <Typography textAlign="center">{'Log out'}</Typography>
-          </MenuItem> :
-          <MenuItem key={'Login'} onClick={goToLoginPage}>
-          <Typography textAlign="center">{'Login'}</Typography>
-        </MenuItem>
+            <MenuItem key={'Log out'} onClick={logout}>
+              <Typography textAlign="center">{'Log out'}</Typography>
+            </MenuItem> :
+            <MenuItem key={'Login'} //onClick={goToLoginPage}>
+            >
+              <Typography textAlign="center">{'Login'}</Typography>
+            </MenuItem>
         }
         <ThemeSwitch />
       </Menu>

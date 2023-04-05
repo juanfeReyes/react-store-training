@@ -6,7 +6,8 @@ import { CalificationHeader } from "./CalificationHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { addGame, selectCart } from "../../store/ShoppingCartSlice";
 import { Game } from "../../model/Game.model";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
+//import { useNavigate } from "react-router-dom";
 
 
 export const GameImage = styled.img<{ squareSize: number }>`
@@ -46,10 +47,11 @@ export const GameItem = (props: Game) => {
 
   const dispatch = useDispatch()
   const shoppingCart = useSelector(selectCart)
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const goToDetailPage = () => {
-    navigate(`/games/${id}`)
+    //TODO: use next navigation
+    router.push(`/games/${id}`)
   }
 
   return <>

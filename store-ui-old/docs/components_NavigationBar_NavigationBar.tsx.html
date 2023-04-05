@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/NavigationBar/NavigationBar.tsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/NavigationBar/NavigationBar.tsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
+import { Badge } from '@mui/material';
+import { ShoppingCartBadge } from './ShoppingCartBadge';
+
+const pages = ['Game', 'Cart'];
+const settings = ['Profile', 'Logout'];
+const title = 'Stream Game Store'
+
+const ProfileButton = (props: any) => {
+  const { handleOpenUserMenu, handleCloseUserMenu, anchorElUser } = props;
+
+  return &lt;>
+    &lt;Box sx={{ flexGrow: 0 }}>
+      &lt;Tooltip title="Open settings">
+        &lt;IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          &lt;Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        &lt;/IconButton>
+      &lt;/Tooltip>
+      &lt;Menu
+        sx={{ mt: '45px' }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {settings.map((setting) => (
+          // Enable menu items when developed
+          &lt;MenuItem disabled key={setting} onClick={handleCloseUserMenu}>
+            &lt;Typography textAlign="center">{setting}&lt;/Typography>
+          &lt;/MenuItem>
+        ))}
+        &lt;ThemeSwitch />
+      &lt;/Menu>
+    &lt;/Box>
+  &lt;/>
+}
+
+/**
+ *  Navigation bar to contain menu, navigation options and home button
+ * 
+ * @component
+ */
+export function NavigationBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState&lt;null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState&lt;null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent&lt;HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent&lt;HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+
+  return (
+    &lt;AppBar position='sticky'>
+      &lt;Container maxWidth="xl">
+        &lt;Toolbar disableGutters>
+          &lt;SportsEsportsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          &lt;Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            {title}
+          &lt;/Typography>
+
+
+          &lt;SportsEsportsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          &lt;Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            {title}
+          &lt;/Typography>
+          &lt;Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              &lt;Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              &lt;/Button>
+            ))}
+          &lt;/Box>
+
+          &lt;ShoppingCartBadge />
+          &lt;ProfileButton handleOpenUserMenu={handleOpenUserMenu} handleCloseUserMenu={handleCloseUserMenu} anchorElUser={anchorElUser} />
+        &lt;/Toolbar>
+      &lt;/Container>
+    &lt;/AppBar>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CreateGameModal.html">CreateGameModal</a></li><li><a href="GameItem.html">GameItem</a></li><li><a href="GameItemCart.html">GameItemCart</a></li><li><a href="GamesList.html">GamesList</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="SearchBar.html">SearchBar</a></li><li><a href="ShoppingCartBadge.html">ShoppingCartBadge</a></li><li><a href="ShoppingCartModal.html">ShoppingCartModal</a></li><li><a href="ThemeSwitch.html">ThemeSwitch</a></li><li><a href="ThemeToggler.html">ThemeToggler</a></li></ul><h3>Interfaces</h3><ul><li><a href="Game.html">Game</a></li><li><a href="GameCartItem.html">GameCartItem</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createGame">createGame</a></li><li><a href="global.html#getGames">getGames</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 08 2023 17:59:38 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

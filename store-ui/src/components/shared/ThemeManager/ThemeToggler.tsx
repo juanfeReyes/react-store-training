@@ -1,8 +1,8 @@
 import React from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useMemo } from "react";
-import { useSelector } from 'react-redux/es/exports';
 import { selectTheme } from '../../../store/ThemeSlice';
+import { useSelector } from 'react-redux';
 
 /**
  * Theme toggler component
