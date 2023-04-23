@@ -1,16 +1,18 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/hooks/AuthHooks"
+import { useRouter } from "next/router";
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const [user] = useAuth()
-  const navigate = useNavigate()
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) {
-      navigate('/login')
+      router.push('/login')
     }
   })
 
-  return children;
+  
+
+  return user? children: <>Loading....</>;
 }

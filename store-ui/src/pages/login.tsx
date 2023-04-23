@@ -1,10 +1,9 @@
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material"
-import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material"
+import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography, styled } from "@mui/material"
 import { Container } from "@mui/system"
 import { useState } from "react"
 import { useAuth } from "../services/hooks/AuthHooks"
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import styled from "@mui/material/styles/styled"
 import ReportIcon from '@mui/icons-material/Report';
 
 const LoginContainer = styled(Container)(() => ({
@@ -18,7 +17,7 @@ const GridCenterStyled = styled(Grid)(() => ({
 }))
 
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const [user, login] = useAuth()
   const [userForm, setUserForm] = useState({ username: '', password: '', error: false, errorMessage: '' })
 
@@ -95,3 +94,5 @@ export const LoginPage = () => {
     </LoginContainer>
   </>
 }
+
+export default LoginPage

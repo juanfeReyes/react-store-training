@@ -1,12 +1,15 @@
-import { Grid, Paper, Typography, styled as mstyled, Divider, Chip, Stack } from "@mui/material";
+import { Grid, Typography, styled as mstyled, Divider, Chip, Stack } from "@mui/material";
 import { Container } from "@mui/system";
-import { useLoaderData, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { CommentList } from "../components/CommentList/CommentList";
-import { CalificationHeader } from "../components/GamesList/CalificationHeader";
-import { GameItem } from "../components/GamesList/GameItem";
-import { MultipleAddToCart } from "../components/ShoppingCart/MultipleAddToCart";
-import { Game } from "../model/Game.model";
+import { CommentList } from "../../components/CommentList/CommentList";
+import { CalificationHeader } from "../../components/GamesList/CalificationHeader";
+import { GameItem } from "../../components/GamesList/GameItem";
+import { MultipleAddToCart } from "../../components/ShoppingCart/MultipleAddToCart";
+import { Game } from "../../model/Game.model";
+import { GetServerSideProps } from "next";
+import { getGameDetail } from "@/services/GameService";
+import { HomePage } from "../HomePage";
+import { useRouter } from "next/router";
 
 export const GameImage = styled.img<{ squareSize: number }>`
   width: '100%';
@@ -55,10 +58,10 @@ const GameInfo = (props: { game: Game }) => {
 
 const TagBanner = (props: { tags: string[] }) => {
 
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const handleChipClick = (tag: string) => {
-    navigate(`/games/tags/${tag}`)
+    router.push(`/games/tags/${tag}`)
   }
 
   return <>
@@ -74,9 +77,16 @@ const TagBanner = (props: { tags: string[] }) => {
   </>
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const game = await getGameDetail(context.params?.id as string)
 
-export const GameDetailPage = () => {
-  const game = (useLoaderData() as { response: Game }).response
+  return {
+    props: { response: JSON.parse(JSON.stringify(game)) }
+  }
+}
+
+const GameDetail = (props: { response: Game }) => {
+  const game = props.response
   const { title, imgUrl, tags } = game;
 
   return <>
@@ -90,11 +100,11 @@ export const GameDetailPage = () => {
             <GameImage squareSize={325} src={imgUrl} />
           </Grid>
           <Grid item xs={5}>
-              <Stack alignItems={'center'} justifyContent={'space-between'} spacing={1} direction="column">
-                <TagBanner tags={tags} />
-                <GameInfo game={game} />
-                <MultipleAddToCart label="Games to cart" game={game} />
-              </Stack>
+            <Stack alignItems={'center'} justifyContent={'space-between'} spacing={1} direction="column">
+              <TagBanner tags={tags} />
+              <GameInfo game={game} />
+              <MultipleAddToCart label="Games to cart" game={game} />
+            </Stack>
           </Grid>
         </Grid>
         <Grid container item xs={12}>
@@ -126,3 +136,13 @@ export const GameDetailPage = () => {
 
   </>
 }
+
+const GameDetailPage = (props: { response: Game }) => {
+  return <>
+    <HomePage>
+      <GameDetail {...props} />
+    </HomePage>
+  </>
+}
+
+export default GameDetailPage

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { authUser, logoutUser } from "../AuthService";
+import { useRouter } from "next/router";
 
 const USER_STORAGE = 'user_storage'
 
@@ -29,19 +29,18 @@ export const useLocalStorage = (keyName: string, defaultValue: any) => {
 
 export const useAuth = () => {
   const [userLocalStorage, setUserLocalStorage] = useLocalStorage(USER_STORAGE, null)
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const login = async (username: string, password: string) => {
     const authData = await authUser(username, password)
     setUserLocalStorage(authData)
-    navigate(-2)
+    router.back()
   }
 
   const logout = async () => {
     await logoutUser()
     setUserLocalStorage(null)
-    navigate('/')
-    navigate(0)
+    router.push("/games")
   }
 
   const isLogin = ():boolean => {

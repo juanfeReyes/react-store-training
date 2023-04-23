@@ -8,11 +8,13 @@ import { Game } from "../../model/Game.model";
 import { useEffect, useState } from "react";
 import { getGames } from "../../services/GameService";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { useLoaderData } from "react-router-dom";
+//import { useLoaderData } from "react-router-dom";
 
 const ListContainer = styled(Grid)(() => ({
   paddingTop: "2rem"
 }))
+
+
 
 /**
  * Component to display a list of Games
@@ -25,10 +27,9 @@ const ListContainer = styled(Grid)(() => ({
  *  <GameList games={games}/>
  * )
  */
-export const GamesList = () => {
-  const {response, filters} = useLoaderData() as {response: Game[], filters: {[key: string]: string}};
-  const [games, setGames] = useState<Game[]>(response)
-  const [searchFilter, setSearchFilter] = useState<{[key: string]: string}>(filters) 
+export const GamesList = (props : {response: Game[], filters: {[key: string]: string}}) => {
+  const [games, setGames] = useState<Game[]>(props.response)
+  const [searchFilter, setSearchFilter] = useState<{[key: string]: string}>(props.filters) 
 
   const handleSearchGames = async (title: string) => {
     const filters = {...searchFilter, title: title}
