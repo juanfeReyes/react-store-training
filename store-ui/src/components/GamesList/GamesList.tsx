@@ -28,8 +28,6 @@ const ListContainer = styled(Grid)(() => ({
  * )
  */
 export const GamesList = (props : {response: Game[], filters: {[key: string]: string}}) => {
-  //const {response, filters} = useLoaderData() as {response: Game[], filters: {[key: string]: string}};
-
   const [games, setGames] = useState<Game[]>(props.response)
   const [searchFilter, setSearchFilter] = useState<{[key: string]: string}>(props.filters) 
 

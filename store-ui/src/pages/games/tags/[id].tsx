@@ -10,7 +10,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const filters = { title: '', tag: context.params?.id as string };
   const games = await getGames(filters)
   return {
-    //TODO: JSON parse and stringify cause games has serializing error, why?
     props: { filters: filters, response: JSON.parse(JSON.stringify(games)) }
   }
 }

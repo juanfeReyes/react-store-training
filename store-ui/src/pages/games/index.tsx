@@ -8,7 +8,6 @@ import { HomePage } from '../HomePage'
 export const getServerSideProps: GetServerSideProps = async () => {
   const games = await getGames()
   return {
-    //TODO: JSON parse and stringify cause games has serializing error, why?
     props: {response: JSON.parse(JSON.stringify(games))}
   }
 }

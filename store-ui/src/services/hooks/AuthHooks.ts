@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { useLocation, useNavigate } from "react-router-dom";
 import { authUser, logoutUser } from "../AuthService";
 import { useRouter } from "next/router";
 
@@ -30,15 +29,12 @@ export const useLocalStorage = (keyName: string, defaultValue: any) => {
 
 export const useAuth = () => {
   const [userLocalStorage, setUserLocalStorage] = useLocalStorage(USER_STORAGE, null)
-  //TODO: fix navigation
-  //const navigate = useNavigate()
   const router = useRouter()
 
   const login = async (username: string, password: string) => {
     const authData = await authUser(username, password)
     setUserLocalStorage(authData)
     router.back()
-    // navigate(-2)
   }
 
   const logout = async () => {

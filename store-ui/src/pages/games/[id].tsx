@@ -1,6 +1,5 @@
-import { Grid, Paper, Typography, styled as mstyled, Divider, Chip, Stack, CssBaseline } from "@mui/material";
+import { Grid, Typography, styled as mstyled, Divider, Chip, Stack } from "@mui/material";
 import { Container } from "@mui/system";
-//import { useLoaderData, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CommentList } from "../../components/CommentList/CommentList";
 import { CalificationHeader } from "../../components/GamesList/CalificationHeader";
@@ -82,13 +81,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const game = await getGameDetail(context.params?.id as string)
 
   return {
-    //TODO: JSON parse and stringify cause games has serializing error, why?
     props: { response: JSON.parse(JSON.stringify(game)) }
   }
 }
 
 const GameDetail = (props: { response: Game }) => {
-  //const game = (useLoaderData() as { response: Game }).response
   const game = props.response
   const { title, imgUrl, tags } = game;
 
