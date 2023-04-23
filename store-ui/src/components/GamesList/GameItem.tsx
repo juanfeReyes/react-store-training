@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addGame, selectCart } from "../../store/ShoppingCartSlice";
 import { Game } from "../../model/Game.model";
 import { useRouter } from "next/router";
-//import { useNavigate } from "react-router-dom";
 
 
 export const GameImage = styled.img<{ squareSize: number }>`
@@ -50,7 +49,6 @@ export const GameItem = (props: Game) => {
   const router = useRouter()
 
   const goToDetailPage = () => {
-    //TODO: use next navigation
     router.push(`/games/${id}`)
   }
 
@@ -79,9 +77,7 @@ export const GameItem = (props: Game) => {
               onClick={() => dispatch(addGame({game: props}))} >add to cart</Button>
           </Grid>
         </Grid>
-
       </Grid>
-
     </Paper>
   </>
 }

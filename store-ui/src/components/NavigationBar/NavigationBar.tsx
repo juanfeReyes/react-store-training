@@ -14,6 +14,7 @@ import { ThemeSwitch } from '../shared/ThemeManager/ThemeSwitch';
 import { ShoppingCartBadge } from './ShoppingCartBadge';
 import { useAuth } from '../../services/hooks/AuthHooks';
 import { AccountCircle } from '@mui/icons-material';
+import { useRouter } from 'next/router';
 
 const settings = ['Profile'];
 const title = 'Stream Game Store'
@@ -21,12 +22,11 @@ const title = 'Stream Game Store'
 const ProfileButton = (props: any) => {
   const [user, login, logout, isLogin] = useAuth()
   const { handleOpenUserMenu, handleCloseUserMenu, anchorElUser } = props;
-  //TODO: fix navigation
-  // const navigate = useNavigate();
+  const router = useRouter()
 
-  // const goToLoginPage = () => {
-  //   navigate('/login')
-  // }
+  const goToLoginPage = () => {
+    router.push('/login')
+  }
 
   return <>
     <Box sx={{ flexGrow: 0 }}>
@@ -62,8 +62,7 @@ const ProfileButton = (props: any) => {
             <MenuItem key={'Log out'} onClick={logout}>
               <Typography textAlign="center">{'Log out'}</Typography>
             </MenuItem> :
-            <MenuItem key={'Login'} //onClick={goToLoginPage}>
-            >
+            <MenuItem key={'Login'} onClick={goToLoginPage}>
               <Typography textAlign="center">{'Login'}</Typography>
             </MenuItem>
         }
